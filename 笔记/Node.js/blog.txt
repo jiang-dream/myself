@@ -1,0 +1,13 @@
+1. 关于静态资源请求路径问题
+
+	a. 静态资源请求时，以当前浏览器路径为当前文件目录，如浏览器请求为localhost/home/login
+	   会将login当成请求文件，而把/home作为当前目录（已经设置了静态资源目录，且已开放）
+
+	b. 静态资源的目录和请求路径相同时不会出错，如：请求路径为 localhost/home/login 
+	   文件路径存储为 home/css/index.css ,则文件请求路径为 css/index.css 时，不会报错
+	   如果请求路径为 localhost/admin/login时，就会出错，文件请求路径会变成 localhost/admin/css/index.css
+	   
+	c. 将文件路径设置为绝对路径，则可以避免报错，如 /home/css.index.css ,路径前面的/ 则代表静态资源的根目录，
+	   如果静态资源的目录设置为了 public ，则请求路径为 public/home/css/index.css
+
+2. 模板引擎的文件路径是模板引擎进行解析的

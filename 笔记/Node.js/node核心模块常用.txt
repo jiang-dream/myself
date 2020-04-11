@@ -1,0 +1,13 @@
+http模块：创建服务器  http.createServer()
+
+fs文件模块：读取，写入文件操作  fs.writeFeile()  fs.readFeil()
+
+mime模块：mime.getType() 获取目标文件的文件类型
+
+path模块：路径处理。  path.join()方法根据计算机系统自动拼接路径
+
+url模块： 解析url.   url.parse().pathname 获取url中包含的路径
+
+querystring模块：querystring.parse() 将字符串转为数组
+
+mongoose模块：  new mongoose.Schema()创建集合规则  mongoose.model(集合，集合规则）创建集合构造函数
