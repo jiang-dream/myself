@@ -1,0 +1,80 @@
+一、Date的构造函数
+
+有四种形式的Date构造函数：
+
+//1.构造函数没有参数，则返回当前日期的Date对象
+var now = new Date();
+//2.构造函数的参数为日期的毫秒数，返回距离1970年1月1日经过该毫秒后对应的日期
+var date=new Date(1222233);
+//3.构造函数的参数为对应的日期字符串，返回对应的日期对象，其中年，月，日是必须的，时分秒可选
+//实际上，上面这种直接将表示日期的字符串传递给Date构造函数，会在后台调用Date.parse
+var date1 = new Date('2016-01-01'); 
+var date2 = new Date('2016/01/01 12:00:00'); 
+//4.构造函数的参数分别为年份，基于0的月份（0-11），月中的哪一天（1-31），小时数（0-23），分钟，秒以及毫秒。
+//在这些参数中，只有前两个参数（年和月）是必需的。如果没有提供月中的天数，则假设天数为1，如果省略其他参数，则统统假设为0
+//实际上，上面这种情况的构造函数，在后台调用了Date.UTC
+var date2 = new Date(2016,4,5,17,55,55);
+
+二、返回日期对应的毫秒数
+
+1.Date.parse();    Date.parse()接收一个日期字符串，返回该日期对应的毫秒数。
+
+2.Date.UTC() ;    Date.UTC()的参数参数分别为年份，基于0的月份（0-11），月中的哪一天（1-31），小时数（0-23），分钟，秒以及毫秒。在这些参数中，只有前两个参数（年和月）是必需的。如果没有提供月中的天数，则假设天数为1，如果省略其他参数，则统统假设为0。返回该日期对应的毫秒数。
+
+3.如果已有日期对象date，获取它对应的毫秒数，大多采用date.getTime()或者+date
+
+三 、获取当前时间对应的毫秒数
+这常常用在监测一段代码运行了多长时间。
+方法一：var start= Date.now();
+方法二：var end= +new Date();
+方法三：var end= new Date().getTime() 
+
+四、常见的Date方法
+var myDate = new Date();
+
+myDate.getYear();  // 获取当前年份(2位)
+myDate.getFullYear(); // 获取完整的年份(4位,1970-????)   mydate.setFullYear(2012);//设置年份，传入的参数必须是四位数字
+myDate.getMonth(); // 获取当前月份(0-11,0代表1月)		mydate.setMonth(0);//设置月份，参数必须为0-11的数字
+myDate.getDate(); // 获取当前日(1-31)			mydate.setDate(11);//设置月份中的天数，参数必须为1-31之间的数字
+myDate.getDay(); // 获取当前星期X(0-6,0代表星期天)
+myDate.getTime(); // 获取当前时间(从1970.1.1开始的毫秒数)   mydate.setTime(1);//以毫秒数设置日期，这常常会改变整个日期对象
+myDate.getHours(); // 获取当前小时数(0-23)		mydate.setHours()
+myDate.getMinutes(); // 获取当前分钟数(0-59)		mydate.setMinutes()
+myDate.getSeconds(); // 获取当前秒数(0-59)		mydate.setSeconds()
+myDate.getMilliseconds(); // 获取当前毫秒数(0-999)
+myDate.toLocaleDateString(); // 获取当前日期
+myDate.toLocaleTimeString(); // 获取当前时间
+myDate.toLocaleString( ); // 获取日期与时间
+
+
+五、js时间戳与日期格式转换
+1.时间戳转换成日期格式
+function timestampToTime(timestamp) {
+    if (!timestamp) {
+        return '-';
+    }
+    let date = new Date(timestamp);
+    let Y = date.getFullYear() + '-';
+    let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+    let D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ';
+    let h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+    let m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+    let s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
+
+    return Y + M + D + h + m + s;
+}
+timestampToTime(1403058804);
+
+2.日期格式转换成时间戳
+function timeToTimestamp(time) {
+    var _date = new Date(time);
+    // 有四种方式获取
+    var time1 = _date.getTime();
+    var time2 = _date.valueOf();
+    var time3 = Date.parse(_date);
+    var time4 = + new Date（time）;
+
+    return time1;
+}
+
+timeToTimestamp('2014-04-23 18:55:49:123');
